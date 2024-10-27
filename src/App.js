@@ -4,11 +4,13 @@ import Layout from "./components/Layout";
 import useProduct from "./hooks/useProduct";
 
 function App() {
-  const { products, isLoading } = useProduct();
+  const { products, isLoading, currentCategory, setCurrentCategory } =
+    useProduct();
+
   return (
     <Layout>
       <section>
-        <Categories />
+        <Categories active={currentCategory} setActive={setCurrentCategory} />
       </section>
       <section className="mt-6">
         {isLoading ? (

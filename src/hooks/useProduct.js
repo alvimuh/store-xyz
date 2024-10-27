@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export default function useProduct() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentCategory, setCurrentCategory] = useState(null);
 
   async function fetchProducts() {
     const res = await fetch("https://fakestoreapi.in/api/products");
@@ -18,5 +19,7 @@ export default function useProduct() {
   return {
     products,
     isLoading,
+    currentCategory,
+    setCurrentCategory,
   };
 }
