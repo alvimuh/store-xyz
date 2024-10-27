@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Categories from "./components/Categories";
+import Layout from "./components/Layout";
+import useProduct from "./hooks/useProduct";
 
 function App() {
+  const { products, isLoading } = useProduct();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <section>
+        <Categories />
+      </section>
+      <section className="mt-6">
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+            {products.map((product) => (
+              <a key={product.id} href="/">
+                <div className="bg-white rounded-lg shadow-md p-4 mb-2">
+                  <img
+                    className=" aspect-square object-contain hover:scale-105 transition duration-300 ease-in-out"
+                    src={product.image}
+                    alt={product.title}
+                  />
+                </div>
+                <h3 className="font-semibold line-clamp-2 text-base">
+                  {product.title}
+                </h3>
+                <p className="font-bold text-lg text-green-600">
+                  ${product.price}
+                </p>
+              </a>
+            ))}
+          </div>
+        )}
+      </section>
+    </Layout>
   );
 }
 
