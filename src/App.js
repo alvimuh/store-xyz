@@ -4,11 +4,10 @@ import Layout from "./components/Layout";
 import useProduct from "./hooks/useProduct";
 
 function App() {
-  const { products, isLoading, currentCategory, setCurrentCategory } =
-    useProduct();
+  const { products, isLoading, currentCategory, setCurrentCategory } = useProduct();
 
   return (
-    <Layout>
+    <Layout name="Alvi">
       <section>
         <Categories active={currentCategory} setActive={setCurrentCategory} />
       </section>

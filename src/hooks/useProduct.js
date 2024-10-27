@@ -12,9 +12,23 @@ export default function useProduct() {
     setIsLoading(false);
   }
 
+  async function fetchProductsByCategory(category) {
+    setIsLoading(true);
+    const res = await fetch(
+      `https://fakestoreapi.in/api/products/category/?=type=${category}`
+    );
+    const data = await res.json();
+    setProducts(data.products);
+    setIsLoading(false);
+  }
+
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  useEffect(() => {
+    if (currentCategory) fetchProductsByCategory(currentCategory);
+  }, [currentCategory]);
 
   return {
     products,
